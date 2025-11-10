@@ -29,3 +29,13 @@ def shot_onetime(self):
 
     print("Timeout (F9 not detected)")
     return False
+
+
+import serial, time
+
+with serial.Serial("COM8", 19200, timeout=0.3) as ser:
+    ser.write(bytes([0xA5, 0x44, 0xF2, 0x36, 0x5A]))
+    time.sleep(0.2)
+    resp = ser.read_all()
+    print("RX:", resp.hex())
+
